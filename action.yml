@@ -1,4 +1,4 @@
-name: 'Install packages from diferrent using Yarn'
+name: 'Install packages from diferrent registries using Yarn'
 author: digitalvisioncz
 description: 'Create required npmrc, run yarn and delete npmrc.'
 inputs:
@@ -8,28 +8,15 @@ inputs:
   registryUrl:
     description: 'URL of the registry (without `https://`'
     required: true
-  registryName:
-    description: 'Name of the registry'
-    required: true
 
 runs:
   using: 'composite'
   steps:
     - run: echo "Creating .npmrc"
       shell: bash
-    - run: echo "@${{ inputs.registryName }}:registry=https://${{ inputs.registryUrl }}/" >> ~/.npmrc
+    - run: echo "//${{ inputs.registryUrl }}/:_authToken=${{ inputs.token }}" >> ./.npmrc
       shell: bash
-    - run: echo "//${{ inputs.registryUrl }}/:_authToken=${{ inputs.token }}" >> ~/.npmrc
-      shell: bash
-    - run: cat ~/.npmrc
-      shell: bash
-    - run: echo "Installing"
-      shell: bash
-    - run: yarn
-      shell: bash
-    - run: echo "Removing .npmrc"
-      shell: bash
-    - run: rm ~/.npmrc
+    - run: cat ./.npmrc
       shell: bash
 branding:
   icon: package
