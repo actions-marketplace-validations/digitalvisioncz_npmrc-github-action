@@ -1,6 +1,6 @@
-name: 'Install packages from diferrent registries using Yarn'
+name: '.npmrc auth tokens'
 author: digitalvisioncz
-description: 'Create required npmrc, run yarn and delete npmrc.'
+description: 'Add private repositories'' auth tokens to .npmrc'
 inputs:
   token:
     description: 'Access token'
